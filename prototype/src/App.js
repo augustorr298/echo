@@ -8,15 +8,17 @@ import {
 } from './components/AdvancedCalmingTools';
 import MentalHealthAssessment from './components/MentalHealthAssessment';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
+import RecursosScreen from './components/RecursosScreen';
+import InicioScreen from './components/InicioScreen';
+import SeguimientoScreen from './components/SeguimientoScreen';
+import AjustesScreen from './components/AjustesScreen';
+import PerfilScreen from './components/PerfilScreen';
+import BottomNav from './components/BottomNav';
+import ZenTree from './components/ZenTree';
+import AnalisisRapidoTest from './components/AnalisisRapidoTest';
+import RecursoDetalle from './components/RecursoDetalle';
+import { ArrowLeft, Home, BarChart2, BookOpen, Settings, User } from './components/icons';
 import dataCollectionService from './services/DataCollectionService';
-
-// --- Íconos (Simulación de lucide-react) ---
-const Home = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
-const BarChart2 = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>;
-const BookOpen = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
-const Settings = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l-.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15-.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>;
-const User = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
-const ArrowLeft = (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>;
 
 // --- Componentes de Herramientas de Calma ---
 const BreathingExercise = ({ onBack }) => { const [text, setText] = useState('Prepárate...'); useEffect(() => { const sequence = ['Inhala...', 'Sostén', 'Exhala...', 'Sostén']; let i = 0; const timer = setInterval(() => { i = (i + 1) % 4; setText(sequence[i]); }, 4000); setTimeout(() => setText('Inhala...'), 500); return () => clearInterval(timer); }, []); return <div className="fixed inset-0 bg-gradient-to-br from-sky-200 to-sky-300 flex flex-col items-center justify-center z-50 p-4"><div className="relative w-64 h-64 flex items-center justify-center"><div className="absolute w-full h-full bg-gradient-to-br from-sky-400 to-sky-500 rounded-full animate-breathe shadow-2xl"></div><p className="z-10 text-4xl font-light text-white">{text}</p></div><button onClick={onBack} className="mt-16 bg-white/80 backdrop-blur-sm text-sky-800 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-white transition-all duration-300">Me siento mejor</button><style>{`.animate-breathe { animation: breathe 16s ease-in-out infinite; } @keyframes breathe { 0%, 100% { transform: scale(0.8); opacity: 0.8; } 25% { transform: scale(1); opacity: 1; } 50% { transform: scale(1); opacity: 1; } 75% { transform: scale(0.8); opacity: 0.8; } }`}</style></div>; };
@@ -109,54 +111,6 @@ const CrisisHubModal = ({ onSelectTool, onClose }) => {
     );
 };
 
-// --- Componentes de la App (Actualizados) ---
-const ZenTree = () => { const [flowers, setFlowers] = useState([]); const handleClick = (e) => { e.stopPropagation(); const newFlower = { id: Date.now(), x: Math.random() * 80 + 10, y: Math.random() * 50 + 10 }; setFlowers(prev => [...prev, newFlower]); }; return ( <div className="relative w-full h-72 pb-4 cursor-pointer" onClick={handleClick}> <svg viewBox="0 0 200 200" className="w-full h-full"> <path d="M 100 200 C 100 180, 80 150, 80 120 S 90 80, 70 60" stroke="#8B5A2B" strokeWidth="5" fill="none" /> <path d="M 80 120 C 100 110, 110 100, 120 80 S 140 50, 150 40" stroke="#8B5A2B" strokeWidth="4" fill="none" /> <path d="M 70 60 C 60 50, 50 40, 40 30" stroke="#8B5A2B" strokeWidth="3" fill="none" /> {flowers.map(f => ( <circle key={f.id} cx={`${f.x}%`} cy={`${f.y}%`} r="3" fill="rgba(236, 72, 153, 0.8)" className="animate-bloom" /> ))} </svg> <p className="absolute bottom-0 w-full text-center text-slate-500 text-sm">Haz clic para ver florecer</p> <style>{`.animate-bloom { animation: bloom 0.5s ease-out forwards; } @keyframes bloom { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }`}</style> </div> ); };
-const AnalisisRapidoTest = ({ onFinish }) => { const [step, setStep] = useState(0); const questions = [ { q: "En una escala del 1 al 5, ¿cómo calificarías tu nivel de energía hoy?", a: ["Muy bajo", "Bajo", "Normal", "Alto", "Muy alto"] }, { q: "¿Qué emoción describe mejor tu estado de ánimo ahora mismo?", a: ["Tristeza", "Ansiedad", "Calma", "Alegría", "Irritación"] }, { q: "¿Has dedicado tiempo para ti hoy?", a: ["No, nada", "Un poco", "Lo suficiente", "Sí, bastante"] } ]; if (step >= questions.length) { return ( <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-8 text-center animate-fade-in"> <h2 className="text-2xl font-bold text-slate-800 mb-4">¡Gracias por compartir!</h2> <p className="text-slate-600 mb-8">Reconocer cómo te sientes es el primer paso. Recuerda ser amable contigo. Te sugerimos explorar la sección de 'Recursos' para una meditación corta.</p> <button onClick={onFinish} className="bg-violet-500 text-white font-semibold py-3 px-8 rounded-full shadow-lg">Finalizar</button> </div> ); } return ( <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-6 animate-fade-in"> <div className="w-full max-w-sm text-center"> <p className="font-bold text-slate-700 mb-6 text-xl">{questions[step].q}</p> <div className="space-y-3"> {questions[step].a.map(answer => ( <button key={answer} onClick={() => setStep(s => s + 1)} className="w-full bg-slate-100 text-slate-700 p-4 rounded-lg hover:bg-violet-100 hover:text-violet-700 transition-colors"> {answer} </button> ))} </div> </div> </div> ); };
-const RecursoDetalle = ({ resource, onBack }) => ( <div className="fixed inset-0 bg-white z-50 p-6 animate-fade-in overflow-y-auto"> <button onClick={onBack} className="flex items-center gap-2 text-slate-600 font-semibold mb-6"> <ArrowLeft /> Volver </button> <h1 className="text-3xl font-bold text-slate-800 mb-4">{resource.title}</h1> <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">{resource.content}</p> </div> );
-const InicioScreen = ({ onStartTest }) => ( <div className="p-6 space-y-6 animate-fade-in text-center"> <h1 className="text-3xl font-bold text-slate-800">Hola, Usuario</h1> <p className="text-slate-500">Tómate un momento para conectar contigo.</p> <ZenTree /> <div className="bg-white/80 p-4 rounded-2xl shadow-sm"> <h2 className="font-bold text-slate-700 mb-2">Análisis Rápido</h2> <p className="text-sm text-slate-500 mb-3">Evalúa tu estado emocional actual.</p> <button onClick={onStartTest} className="w-full bg-violet-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-violet-600 transition-colors">Comenzar Test</button> </div> </div> );
-
-const RecursosScreen = ({ onSelectResource }) => {
-    const resources = {
-        Articulos: [
-            { id: 1, title: "Técnica de Respiración 4-7-8", short: "Calma tu sistema nervioso en minutos.", content: "1. Siéntate o acuéstate en una posición cómoda.\n2. Cierra los ojos suavemente.\n3. Inhala por la nariz durante 4 segundos.\n4. Sostén la respiración durante 7 segundos.\n5. Exhala completamente por la boca durante 8 segundos, haciendo un sonido suave.\n6. Repite el ciclo 3-5 veces." },
-            { id: 2, title: "Meditación de Escaneo Corporal", short: "Conecta con tu cuerpo y libera tensión.", content: "1. Encuentra una posición cómoda.\n2. Cierra los ojos y lleva tu atención a los dedos de tus pies.\n3. Nota cualquier sensación sin juzgar: calor, frío, hormigueo.\n4. Lentamente, mueve tu atención hacia arriba: tobillos, piernas, rodillas, etc.\n5. Continúa subiendo por todo tu cuerpo hasta llegar a la coronilla.\n6. Tómate tu tiempo en cada parte, simplemente observando." },
-            { id: 3, title: "Manejo de la Ansiedad Social", short: "Pasos prácticos para sentirte más seguro.", content: "La ansiedad social es común. Empieza por identificar los pensamientos negativos automáticos. Cuestiónalos: ¿son 100% ciertos? Luego, practica la exposición gradual. Empieza con situaciones de bajo riesgo, como saludar a un vecino, y avanza poco a poco. Recuerda que la otra persona probablemente no te está juzgando tan duramente como tú mismo." },
-        ],
-        Podcasts: [
-            { id: 4, title: "Podcast: Entiende Tu Mente", short: "Psicología y bienestar en 20 minutos.", content: "Un podcast popular que explora temas de psicología de manera accesible. Busca 'Entiende Tu Mente' en tu plataforma de podcasts favorita para empezar a escuchar." },
-        ]
-    };
-    return (
-        <div className="p-6 space-y-6 animate-fade-in">
-            <h1 className="text-3xl font-bold text-slate-800 mb-4">Recursos</h1>
-            <div>
-                <h2 className="text-xl font-bold text-slate-700 mb-3">Artículos y Técnicas</h2>
-                {resources.Articulos.map(r => (
-                    <div key={r.id} onClick={() => onSelectResource(r)} className="bg-white/80 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-3">
-                        <h3 className="font-bold text-slate-700">{r.title}</h3>
-                        <p className="text-sm text-slate-500">{r.short}</p>
-                    </div>
-                ))}
-            </div>
-            <div>
-                <h2 className="text-xl font-bold text-slate-700 mb-3">Podcasts Recomendados</h2>
-                {resources.Podcasts.map(r => (
-                    <div key={r.id} onClick={() => onSelectResource(r)} className="bg-white/80 p-4 rounded-2xl shadow-sm hover:shadow-md transition-shadow cursor-pointer mb-3">
-                        <h3 className="font-bold text-slate-700">{r.title}</h3>
-                        <p className="text-sm text-slate-500">{r.short}</p>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-// --- Componentes sin cambios mayores ---
-const SeguimientoScreen = () => ( <div className="p-6 animate-fade-in"> <h1 className="text-3xl font-bold text-slate-800 mb-4">Tu Progreso</h1> <div className="bg-white/80 p-4 rounded-2xl shadow-sm"> <h2 className="font-bold text-slate-700 mb-2">Niveles de Estrés (Última Semana)</h2> <div className="h-40 flex items-end justify-around space-x-2 mt-4"> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '40%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '60%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '50%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '80%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '30%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '40%'}}></div> <div className="w-full bg-teal-300 rounded-t-lg" style={{height: '20%'}}></div> </div> </div> </div> );
-const AjustesScreen = () => ( <div className="p-6 space-y-4 animate-fade-in"> <h1 className="text-3xl font-bold text-slate-800 mb-4">Ajustes</h1> <div className="bg-white/80 p-4 rounded-2xl shadow-sm flex justify-between items-center"> <span className="font-semibold text-slate-700">Notificaciones</span> <div className="w-12 h-6 bg-slate-300 rounded-full cursor-pointer p-1"><div className="w-4 h-4 bg-white rounded-full"></div></div> </div> <div className="bg-white/80 p-4 rounded-2xl shadow-sm flex justify-between items-center"> <span className="font-semibold text-slate-700">Modo Oscuro</span> <div className="w-12 h-6 bg-slate-300 rounded-full cursor-pointer p-1"><div className="w-4 h-4 bg-white rounded-full"></div></div> </div> <div className="bg-white/80 p-4 rounded-2xl shadow-sm"> <p className="text-sm text-slate-600">Privacidad de Datos</p> </div> </div> );
-const PerfilScreen = () => ( <div className="p-6 space-y-4 text-center animate-fade-in"> <User className="w-24 h-24 mx-auto text-slate-500 bg-white rounded-full p-2"/> <h1 className="text-2xl font-bold text-slate-800">Usuario de ECHO</h1> <p className="text-slate-500">Miembro desde 2024</p> </div> );
-const BottomNav = ({ activeScreen, setActiveScreen }) => { const navItems = [ { id: 'inicio', icon: Home, label: 'Inicio' }, { id: 'seguimiento', icon: BarChart2, label: 'Seguimiento' }, { id: 'recursos', icon: BookOpen, label: 'Recursos' }, { id: 'ajustes', icon: Settings, label: 'Ajustes' }, { id: 'perfil', icon: User, label: 'Perfil' }, ]; return ( <div className="absolute bottom-0 left-0 right-0 h-20 bg-white/70 backdrop-blur-md rounded-t-3xl flex justify-around items-center shadow-top"> {navItems.map(item => ( <button key={item.id} onClick={() => setActiveScreen(item.id)} className="flex flex-col items-center justify-center space-y-1"> <item.icon className={`w-7 h-7 transition-colors ${activeScreen === item.id ? 'text-violet-600' : 'text-slate-400'}`} /> <span className={`text-xs font-semibold transition-colors ${activeScreen === item.id ? 'text-violet-600' : 'text-slate-400'}`}>{item.label}</span> </button> ))} </div> ); };
-
 // --- Componente Principal de la App (Lógica Actualizada) ---
 export default function App() {
     const [activeScreen, setActiveScreen] = useState('inicio');
@@ -187,12 +141,18 @@ export default function App() {
 
     const renderScreen = () => {
         switch (activeScreen) {
-            case 'inicio': return <InicioScreen onStartTest={() => setIsTestActive(true)} />;
+            case 'inicio': return <InicioScreen 
+                onStartTest={() => setIsTestActive(true)} 
+                onStartBreathing={() => setActiveTool('breathing')} 
+            />;
             case 'recursos': return <RecursosScreen onSelectResource={setActiveResource} />;
             case 'seguimiento': return <SeguimientoScreen onShowAnalytics={() => setShowAnalytics(true)} />;
             case 'ajustes': return <AjustesScreen />;
             case 'perfil': return <PerfilScreen />;
-            default: return <InicioScreen onStartTest={() => setIsTestActive(true)} />;
+            default: return <InicioScreen 
+                onStartTest={() => setIsTestActive(true)} 
+                onStartBreathing={() => setActiveTool('breathing')} 
+            />;
         }
     };
 
@@ -217,14 +177,17 @@ export default function App() {
             <div className="relative w-full max-w-sm h-[800px] bg-slate-100 rounded-[40px] shadow-2xl overflow-hidden border-8 border-slate-800 flex flex-col">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-slate-800 rounded-b-xl z-20"></div>
                 
-                <main className="flex-grow overflow-y-auto pb-24">
+                <main className="flex-grow overflow-y-auto">
                     {renderScreen()}
                 </main>
                 
                 {activeScreen === 'inicio' && (
-                    <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10">
-                        <button onClick={() => setIsHubOpen(true)} className="bg-gradient-to-br from-rose-500 to-orange-400 text-white font-bold py-4 px-6 rounded-full shadow-xl hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-rose-300 transition-all duration-300 transform hover:scale-110 flex items-center gap-3">
-                            Momento de Calma
+                    <div className="px-6 py-2 pb-24 bg-gradient-to-t from-slate-200/50 to-transparent">
+                        <button 
+                            onClick={() => setIsHubOpen(true)} 
+                            className="w-full bg-gradient-to-r from-rose-500 to-orange-400 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-rose-300 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                            ༄ Momento de Calma ༄ 
                         </button>
                     </div>
                 )}

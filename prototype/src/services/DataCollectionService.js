@@ -1,4 +1,7 @@
 // Data Collection and Integration Service
+import { saveAssessmentResult, saveInterventionUsage, saveProgressEntry } from '../components/firestoreHelpers';
+import authService from './AuthService';
+
 class DataCollectionService {
     constructor() {
         this.dataStore = {
@@ -14,6 +17,9 @@ class DataCollectionService {
     // Initialize the service
     async initialize() {
         try {
+            // Initialize auth service first
+            authService.initialize();
+            
             // Load existing data from localStorage
             const storedData = localStorage.getItem('echoMentalHealthData');
             if (storedData) {
@@ -24,9 +30,9 @@ class DataCollectionService {
             await this.initializeWearableConnections();
             
             this.initialized = true;
-            console.log('Data Collection Service initialized');
+            console.log('✅ Data Collection Service initialized');
         } catch (error) {
-            console.error('Failed to initialize Data Collection Service:', error);
+            console.error('❌ Failed to initialize Data Collection Service:', error);
         }
     }
 

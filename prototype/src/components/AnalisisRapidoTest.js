@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { saveTestResult } from './firestoreHelpers';
+import { saveAssessmentResult } from './firestoreHelpers';
 const questions = [
   { q: "En una escala del 1 al 5, ¿cómo calificarías tu nivel de energía hoy?", a: ["Muy bajo", "Bajo", "Normal", "Alto", "Muy alto"] },
   { q: "¿Qué emoción describe mejor tu estado de ánimo ahora mismo?", a: ["Tristeza", "Ansiedad", "Calma", "Alegría", "Irritación"] },
@@ -17,9 +17,14 @@ const AnalisisRapidoTest = ({ onFinish }) => {
     } else {
       setSaving(true);
       try {
-        await saveTestResult({ answers: newAnswers });
+        await saveAssessmentResult({ 
+          type: 'quick-assessment',
+          answers: newAnswers,
+          score: newAnswers.length // Simple scoring
+        });
+        console.log('Assessment saved successfully');
       } catch (e) {
-        // Optionally handle error
+        console.warn('Could not save assessment:', e.message);
       }
       setSaving(false);
       onFinish();
